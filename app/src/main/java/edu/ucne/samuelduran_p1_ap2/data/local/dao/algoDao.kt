@@ -1,17 +1,24 @@
+
 package edu.ucne.samuelduran_p1_ap2.data.local.dao
 
+import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
-import edu.ucne.samuelduran_p1_ap2.data.local.entities.algoEntity
+import edu.ucne.samuelduran_p1_ap2.data.local.entities.AlgoEntity
+import kotlinx.coroutines.flow.Flow
 
-interface algoDao {
+@Dao
+interface AlgoDao {
     @Upsert
-    suspend fun save(algo: algoEntity)
+    suspend fun save(algo: AlgoEntity)
 
-    @Query("""
-        select * from algos where algoId=id
-        limit 1
-    """)
+    @Query("Select * from Algos where algoId = :id")
+    suspend fun find(id: Int): AlgoEntity
 
-    suspend fun find (id: Int): algoEntity
+    @Delete
+    suspend fun delete(algo: AlgoEntity)
+
+    @Query("Select * from Algos")
+    fun getAll(): Flow<List<AlgoEntity>>
 }
