@@ -8,9 +8,11 @@ import androidx.room.PrimaryKey
 data class AlgoEntity(
     @PrimaryKey
     val algoId: Int? = null,
-    val galones: Int? = null,
-    val descuentoPorGalon: Int? = null,
-    val totalDescontado: Int? = null,
-    val total: Int? = null
+    val DatosDelCLiente: String,
+    val galones: Float? = null,
+    val descuentoPorGalon: Float? = null,
+    val precio: Float? = null,
+    val totalDescontado: Float? = null,
+    val total: Float? = null
 
 )
