@@ -21,4 +21,7 @@ interface AlgoDao {
 
     @Query("Select * from Algos")
     fun getAll(): Flow<List<AlgoEntity>>
+
+    @Query("SELECT * FROM Algos WHERE DatosDelCLiente = :DatosDelCLiente LIMIT 1")
+    suspend fun findByDatosDelCLiente(DatosDelCLiente: String): AlgoEntity?
 }
