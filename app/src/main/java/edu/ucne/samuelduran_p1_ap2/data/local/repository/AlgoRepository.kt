@@ -9,10 +9,14 @@ class AlgoRepository @Inject constructor(
 ) {
     suspend fun save(algo: AlgoEntity) = algoDao.save(algo)
 
-    suspend fun find(id: Int) = algoDao.find(id)
+    suspend fun getAlgo(id: Int) = algoDao.find(id)
 
     suspend fun delete(algo: AlgoEntity) = algoDao.delete(algo)
 
-    fun getAll() = algoDao.getAll()
+    fun getAlgos() = algoDao.getAll()
 
+    suspend fun findByDatosDelCLiente(descripcion: String): AlgoEntity? {
+        return algoDao.findByDatosDelCLiente(descripcion)
+
+    }
 }
