@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,11 +27,23 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SamuelDuran_p1_Ap2Theme {
-                val navController = rememberNavController()
-                NavHostExam(navHostController = navController)
+                val navHost = rememberNavController()
+                val items = NavigationItems()
+                NavHostExam(navHostController = navHost, items = items)
+
             }
         }
     }
+
 }
 
+fun NavigationItems() : List<NavigationItem> {
+    return listOf(
+        NavigationItem(
+            title = "Algos",
+            selectedIcon = Icons.Filled.Info,
+            unselectedIcon = Icons.Outlined.Info,
 
+            )
+    )
+}
