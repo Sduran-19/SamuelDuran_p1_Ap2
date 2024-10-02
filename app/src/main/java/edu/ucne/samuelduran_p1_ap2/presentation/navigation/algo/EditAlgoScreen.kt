@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package edu.ucne.registro_prioridades.presentation.algo
+package edu.ucne.samuelduran_p1_ap2.presentation.algo
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -35,9 +35,11 @@ fun EditAlgoScreen(
         onDatosDelClienteChange = viewModel::onDatosDelClienteChange,
         onGalonesChange = viewModel::onGalonesChange,
         onDescuentoPorGalonChange = viewModel::onDescuentoPorGalonChange,
-        onTotalDescontadoChange = viewModel::onTotalDescontadoChange,
         updateTotal = viewModel::updateTotal,
-        save = viewModel::save,
+        save = {
+            viewModel.save()
+            goBack()
+        },
         goBack = goBack
     )
 }
@@ -48,7 +50,6 @@ fun EditAlgoBodyScreen(
     onDatosDelClienteChange: (String) -> Unit,
     onGalonesChange: (Float) -> Unit,
     onDescuentoPorGalonChange: (Float) -> Unit,
-    onTotalDescontadoChange: (Float) -> Unit,
     updateTotal: () -> Unit,
     save: () -> Unit,
     goBack: () -> Unit
@@ -88,7 +89,6 @@ fun EditAlgoBodyScreen(
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            // Mostrar mensajes de error
             uiState.errorMessages?.let { errorMessage ->
                 Text(
                     text = errorMessage,
@@ -160,10 +160,8 @@ fun EditAlgoBodyScreen(
                 label = { Text(text = "Total Descontado") },
                 value = uiState.totalDescontado?.toString() ?: "",
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                onValueChange = { newValue ->
-                    val totalDescontado = newValue.toFloatOrNull() ?: 0f
-                    onTotalDescontadoChange(totalDescontado)
-                }
+                onValueChange = { },
+                enabled = false
             )
             Spacer(modifier = Modifier.height(8.dp))
 

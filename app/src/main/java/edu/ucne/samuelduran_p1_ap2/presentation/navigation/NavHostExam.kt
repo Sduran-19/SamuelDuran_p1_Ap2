@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import edu.ucne.registro_prioridades.presentation.algo.AlgoScreen
-import edu.ucne.registro_prioridades.presentation.algo.DeleteAlgoScreen
-import edu.ucne.registro_prioridades.presentation.algo.EditAlgoScreen
+import edu.ucne.samuelduran_p1_ap2.presentation.algo.AlgoScreen
+import edu.ucne.samuelduran_p1_ap2.presentation.algo.DeleteAlgoScreen
+import edu.ucne.samuelduran_p1_ap2.presentation.algo.EditAlgoScreen
 import edu.ucne.samuelduran_p1_ap2.NavigationItem
 import edu.ucne.samuelduran_p1_ap2.presentation.algo.AlgoListScreen
 

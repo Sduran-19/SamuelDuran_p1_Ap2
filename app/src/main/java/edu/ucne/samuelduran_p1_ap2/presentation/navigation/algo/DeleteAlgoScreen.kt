@@ -1,4 +1,4 @@
-package edu.ucne.registro_prioridades.presentation.algo
+package edu.ucne.samuelduran_p1_ap2.presentation.algo
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,10 +34,14 @@ fun DeleteAlgoScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     DeleteAlgoBodyScreen(
         uiState = uiState,
-        onDeleteAlgo = viewModel::delete,
+        onDeleteAlgo = {
+            viewModel.delete()
+            goBack()
+        },
         goBack = goBack
     )
 }
+
 
 @Composable
 fun DeleteAlgoBodyScreen(

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package edu.ucne.registro_prioridades.presentation.algo
+package edu.ucne.samuelduran_p1_ap2.presentation.algo
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -33,11 +33,14 @@ fun AlgoScreen(viewModel: AlgoViewModel = hiltViewModel(), goBack: () -> Unit) {
         onGalonesChange = viewModel::onGalonesChange,
         onDescuentoPorGalonChange = viewModel::onDescuentoPorGalonChange,
         onPrecioChange = viewModel::onPrecioChange,
-        onTotalDescontadoChange = viewModel::onTotalDescontadoChange,
-        onSaveClick = viewModel::save,
+        onSaveClick = {
+            viewModel.save()
+            goBack()
+        },
         goBack = goBack
     )
 }
+
 
 @Composable
 fun AlgoBodyScreen(
@@ -46,7 +49,6 @@ fun AlgoBodyScreen(
     onGalonesChange: (Float?) -> Unit,
     onDescuentoPorGalonChange: (Float?) -> Unit,
     onPrecioChange: (Float?) -> Unit,
-    onTotalDescontadoChange: (Float?) -> Unit,
     onSaveClick: () -> Unit,
     goBack: () -> Unit
 ) {
@@ -156,18 +158,21 @@ fun AlgoBodyScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Total descontado") },
-                value = uiState.totalDescontado?.toString() ?: "",
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number
-                ),
-                onValueChange = { newValue ->
-                    val totalDescontado = newValue.toFloatOrNull()
-                    onTotalDescontadoChange(totalDescontado)
-                }
-            )
+            Surface(
+                color = Color.LightGray,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                Text(
+                    text = "Total descontado: ${uiState.totalDescontado?.toString() ?: "0.0"}",
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .padding(16.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
@@ -193,3 +198,4 @@ fun AlgoBodyScreen(
         }
     }
 }
+
