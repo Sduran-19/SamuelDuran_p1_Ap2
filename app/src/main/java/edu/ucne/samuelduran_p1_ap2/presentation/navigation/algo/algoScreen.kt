@@ -33,14 +33,10 @@ fun AlgoScreen(viewModel: AlgoViewModel = hiltViewModel(), goBack: () -> Unit) {
         onGalonesChange = viewModel::onGalonesChange,
         onDescuentoPorGalonChange = viewModel::onDescuentoPorGalonChange,
         onPrecioChange = viewModel::onPrecioChange,
-        onSaveClick = {
-            viewModel.save()
-            goBack()
-        },
+        onSaveClick = viewModel::save,
         goBack = goBack
     )
 }
-
 
 @Composable
 fun AlgoBodyScreen(
@@ -158,21 +154,14 @@ fun AlgoBodyScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            Surface(
-                color = Color.LightGray,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Text(
-                    text = "Total descontado: ${uiState.totalDescontado?.toString() ?: "0.0"}",
-                    fontSize = 18.sp,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(16.dp)
-                )
-            }
-
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text(text = "Total Descontado") },
+                value = uiState.totalDescontado?.toString() ?: "",
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                onValueChange = { },
+                enabled = false
+            )
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
@@ -198,4 +187,3 @@ fun AlgoBodyScreen(
         }
     }
 }
-
